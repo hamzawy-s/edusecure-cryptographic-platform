@@ -1,10 +1,13 @@
 <div align="center">
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:142B52,100:2563EB&height=120&section=header&animation=fadeIn" alt="Animated navy and blue EduSecure header" width="100%" />
+
 # EduSecure
 
 ### Layered Cryptographic Security for an Educational Platform
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![CI](https://github.com/hamzawy-s/edusecure-cryptographic-platform/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/hamzawy-s/edusecure-cryptographic-platform/actions/workflows/ci.yml)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/UI-React-149ECA?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-typed-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -285,7 +288,7 @@ npm run build
 Pop-Location
 ```
 
-The build script runs `tsc -b` before Vite bundles the UI. The backend suite includes cryptographic, application, and local TLS integration coverage. On a development machine with the required local key material initialized, `python scripts/verify_tls.py` checks the HTTPS endpoint; `python scripts/attack_demo.py` runs the scripted security demonstrations. Record current results from the latest run rather than relying on a README claim.
+The build script runs `tsc -b` before Vite bundles the UI. The backend suite includes cryptographic, application, and local TLS integration coverage. The HTTPS integration test also checks that the built frontend assets are served, so build the UI before running backend tests from a clean checkout. On a development machine with the required local key material initialized, `python scripts/verify_tls.py` checks the HTTPS endpoint; `python scripts/attack_demo.py` runs the scripted security demonstrations.
 
 Latest local verification (2026-11-16): **38 backend tests passed, 0 failed, 0 skipped**; TypeScript and Vite production build passed; trusted TLS 1.2 and TLS 1.3 handshakes passed; the untrusted CA was rejected; and the attack script's four webhook cases and one encrypted-file tamper case passed. Pytest reports one Starlette deprecation warning related to its `httpx` test client integration.
 

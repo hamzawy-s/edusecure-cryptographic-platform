@@ -1,0 +1,42 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Python environments, bytecode, and test caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Frontend dependencies and generated output
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Local databases, private keys, certificates, and runtime data
+*.db
+*.sqlite
+*.sqlite3
+keys/*
+!keys/.gitkeep
+certificates/*
+!certificates/.gitkeep
+storage/*
+!storage/.gitkeep
+
+# Local scratch files and reports produced by test/demo runs
+tmp/
+*.log
+*.verified
+submission/*.zip
+submission/evidence/junit.xml
+submission/reports/*.pdf
+
+# Captures with transient demo state (kept locally, not published)
+docs/assets/crypto-lab.png
+docs/assets/instructor-roster.png
+docs/assets/credential-verification.png

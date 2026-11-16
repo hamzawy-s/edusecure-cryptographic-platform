@@ -121,7 +121,7 @@ sequenceDiagram
   User->>UI: Submit email and password
   UI->>API: POST login over HTTPS
   API->>DB: Read account and password salt
-  API->>API: PBKDF2-HMAC-SHA256; compare verifier
+  API->>API: PBKDF2-HMAC-SHA256, then compare verifier
   API->>API: Apply failed-login lockout rules
   API-->>UI: Signed session cookie + CSRF token
   UI-->>User: Authenticated view for authorized role
@@ -157,7 +157,7 @@ sequenceDiagram
   participant S as Encrypted storage
   Owner->>API: Upload file
   API->>API: Generate random AES data key and nonce
-  API->>API: AES-256-GCM encrypt; calculate SHA-256 digest
+  API->>API: AES-256-GCM encrypt and calculate SHA-256 digest
   API->>K: Wrap data key with RSA-3072-OAEP/SHA-256
   API->>S: Store ciphertext and wrapped-key metadata
   API-->>Owner: Store file reference
@@ -200,7 +200,7 @@ sequenceDiagram
   CA-->>API: Signature and certificate chain
   API-->>I: Store and display credential
   V->>API: Verify credential and chain
-  API->>API: Recompute digest; verify ECDSA and X.509 links
+  API->>API: Recompute digest, verify ECDSA and X.509 links
   API-->>V: Valid or invalid result
 ```
 
@@ -211,6 +211,7 @@ The application encrypts grade values before persistence and decrypts them only 
 ```mermaid
 sequenceDiagram
   actor Instructor
+  actor Student
   participant API as FastAPI
   participant DB as SQLite
   Instructor->>API: Submit grade for enrolled learner
@@ -218,7 +219,6 @@ sequenceDiagram
   API->>API: Encrypt grade using AES-256-GCM
   API->>DB: Store nonce and ciphertext
   API-->>Instructor: Grade saved
-  actor Student
   Student->>API: Request own grades over HTTPS
   API->>API: Check session and learner ownership
   API->>DB: Read grade ciphertext
